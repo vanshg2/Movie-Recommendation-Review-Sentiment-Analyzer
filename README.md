@@ -1,2 +1,3 @@
 # Movie-Recommendation-Review-Sentiment-Analyzer
-A movie recommendation system that combines content-based filtering with sentiment analysis of user reviews. Built using Python and Streamlit, the application integrates TMDB and YouTube APIs to deliver intelligent movie discovery with explainable recommendations, trailers, cast exploration, and review sentiment insights.
+The Movie Recommendation & Review Sentiment Analyzer is an end-to-end, AI-powered movie discovery platform designed to provide intelligent, transparent, and user-centric recommendations. The system leverages content-based machine learning techniques to recommend movies and applies NLP-based sentiment analysis to analyze user reviews, offering deeper insight into audience opinions.
+The application follows a Netflix-style UI layout and integrates multiple external APIs to enrich the user experience with trailers, cast details, and actor-centric navigation.
