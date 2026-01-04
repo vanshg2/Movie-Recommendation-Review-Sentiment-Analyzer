@@ -4,32 +4,7 @@ import requests
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import os
 
-SIMILARITY_URL = st.secrets["SIMILARITY_URL"]
-SIMILARITY_FILE = "similarity_drive.pkl"  # NEW NAME (important)
 
-def download_if_not_exists(url, filename):
-    if not os.path.exists(filename):
-        with st.spinner("Downloading model..."):
-            response = requests.get(url, stream=True)
-            with open(filename, "wb") as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    f.write(chunk)
-def load_similarity(path):
-    # Read first 2 bytes to detect gzip
-    with open(path, "rb") as f:
-        magic = f.read(2)
-
-    # GZIP magic number = 1f 8b
-    if magic == b"\x1f\x8b":
-        with gzip.open(path, "rb") as f:
-            return pickle.load(f)
-    else:
-        with open(path, "rb") as f:
-            return pickle.load(f)
-
-download_if_not_exists(SIMILARITY_URL, SIMILARITY_FILE)
-with open(SIMILARITY_FILE, "rb") as f:
-    similarity = pickle.load(f)
 # -------------------- SESSION STATE --------------------
 if "selected_movie_id" not in st.session_state:
     st.session_state.selected_movie_id = None
@@ -226,6 +201,32 @@ def recommend(movie):
 # -------------------- STREAMLIT UI --------------------
 
 st.header("🎬 Movie Recommender System")
+SIMILARITY_URL = st.secrets["SIMILARITY_URL"]
+SIMILARITY_FILE = "similarity_drive.pkl"  # NEW NAME (important)
+
+def download_if_not_exists(url, filename):
+    if not os.path.exists(filename):
+        with st.spinner("Downloading model..."):
+            response = requests.get(url, stream=True)
+            with open(filename, "wb") as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+def load_similarity(path):
+    # Read first 2 bytes to detect gzip
+    with open(path, "rb") as f:
+        magic = f.read(2)
+
+    # GZIP magic number = 1f 8b
+    if magic == b"\x1f\x8b":
+        with gzip.open(path, "rb") as f:
+            return pickle.load(f)
+    else:
+        with open(path, "rb") as f:
+            return pickle.load(f)
+
+download_if_not_exists(SIMILARITY_URL, SIMILARITY_FILE)
+with open(SIMILARITY_FILE, "rb") as f:
+    similarity = pickle.load(f)
 
 movies = pickle.load(open("movie_list.pkl", "rb"))
 selected_movie = st.selectbox(
