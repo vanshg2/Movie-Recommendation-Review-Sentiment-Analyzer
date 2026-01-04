@@ -1,0 +1,28 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.env/
+
+# Large ML artifacts
+similarity.pkl
+similarity.pkl.gz
+topk_similarity.pkl.gz
+*.pkl
+*.npz
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Large datasets (can be downloaded separately)
+tmdb_5000_movies.csv
+tmdb_5000_credits.csv
+
+# One-time scripts
+compress_similarity.py
