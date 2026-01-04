@@ -214,7 +214,7 @@ st.header("🎬 Movie Recommender System")
 
 movies = pickle.load(open("movie_list.pkl", "rb"))
 SIMILARITY_URL = st.secrets["SIMILARITY_URL"]
-SIMILARITY_FILE = "similarity.pkl.gz"
+SIMILARITY_FILE = "similarity.pkl"
 
 download_if_not_exists(SIMILARITY_URL, SIMILARITY_FILE)
 
