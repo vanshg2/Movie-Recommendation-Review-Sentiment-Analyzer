@@ -85,7 +85,7 @@ def summarize_sentiments(reviews):
     return counts, avg_score
 
 
-# -------------------- CONSTANTS --------------------
+# -------------------- CONSTANTS ---------------------
 API_KEY = st.secrets["TMDB_API_KEY"]
 YOUTUBE_API_KEY = st.secrets["YOUTUBE_API_KEY"]
 POSTER_BASE_URL = "https://image.tmdb.org/t/p/w500/"
