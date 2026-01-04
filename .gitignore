@@ -57,3 +57,5 @@ tmdb_5000_credits.csv
 # One-time scripts
 compress_similarity.py
 
+.streamlit/secrets.toml
+
