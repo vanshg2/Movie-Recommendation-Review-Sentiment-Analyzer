@@ -2,18 +2,22 @@ import pickle
 import streamlit as st
 import requests
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-
 import os
+
+SIMILARITY_URL = st.secrets["SIMILARITY_URL"]
+SIMILARITY_FILE = "similarity_drive.pkl"  # NEW NAME (important)
 
 def download_if_not_exists(url, filename):
     if not os.path.exists(filename):
-        with st.spinner("Downloading model file..."):
+        with st.spinner("Downloading model..."):
             response = requests.get(url, stream=True)
             with open(filename, "wb") as f:
                 for chunk in response.iter_content(chunk_size=8192):
                     f.write(chunk)
 
-
+download_if_not_exists(SIMILARITY_URL, SIMILARITY_FILE)
+with open(SIMILARITY_FILE, "rb") as f:
+    similarity = pickle.load(f)
 # -------------------- SESSION STATE --------------------
 if "selected_movie_id" not in st.session_state:
     st.session_state.selected_movie_id = None
