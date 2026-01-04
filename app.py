@@ -228,15 +228,6 @@ def recommend(movie):
 st.header("🎬 Movie Recommender System")
 
 movies = pickle.load(open("movie_list.pkl", "rb"))
-SIMILARITY_URL = st.secrets["SIMILARITY_URL"]
-SIMILARITY_FILE = "similarity.pkl"
-
-download_if_not_exists(SIMILARITY_URL, SIMILARITY_FILE)
-
-import pickle
-with open(SIMILARITY_FILE, "rb") as f:
-    similarity = pickle.load(f)
-
 selected_movie = st.selectbox(
     "Type or select a movie from the dropdown",
     movies["title"].values
