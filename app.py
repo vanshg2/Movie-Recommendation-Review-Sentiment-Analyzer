@@ -2,7 +2,6 @@ import pickle
 import streamlit as st
 import requests
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-import gzip
 
 import os
 
@@ -218,8 +217,8 @@ SIMILARITY_FILE = "similarity.pkl"
 
 download_if_not_exists(SIMILARITY_URL, SIMILARITY_FILE)
 
-import gzip, pickle
-with gzip.open(SIMILARITY_FILE, "rb") as f:
+import pickle
+with open(SIMILARITY_FILE, "rb") as f:
     similarity = pickle.load(f)
 
 selected_movie = st.selectbox(
