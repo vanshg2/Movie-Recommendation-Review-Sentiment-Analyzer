@@ -211,18 +211,6 @@ def download_if_not_exists(url, filename):
             with open(filename, "wb") as f:
                 for chunk in response.iter_content(chunk_size=8192):
                     f.write(chunk)
-def load_similarity(path):
-    # Read first 2 bytes to detect gzip
-    with open(path, "rb") as f:
-        magic = f.read(2)
-
-    # GZIP magic number = 1f 8b
-    if magic == b"\x1f\x8b":
-        with gzip.open(path, "rb") as f:
-            return pickle.load(f)
-    else:
-        with open(path, "rb") as f:
-            return pickle.load(f)
 
 download_if_not_exists(SIMILARITY_URL, SIMILARITY_FILE)
 with open(SIMILARITY_FILE, "rb") as f:
