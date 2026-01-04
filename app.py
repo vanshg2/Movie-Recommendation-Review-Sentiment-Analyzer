@@ -4,6 +4,17 @@ import requests
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import gzip
 
+import os
+
+def download_if_not_exists(url, filename):
+    if not os.path.exists(filename):
+        with st.spinner("Downloading model file..."):
+            response = requests.get(url, stream=True)
+            with open(filename, "wb") as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+
+
 # -------------------- SESSION STATE --------------------
 if "selected_movie_id" not in st.session_state:
     st.session_state.selected_movie_id = None
@@ -202,7 +213,13 @@ def recommend(movie):
 st.header("🎬 Movie Recommender System")
 
 movies = pickle.load(open("movie_list.pkl", "rb"))
-with gzip.open("similarity.pkl.gz", "rb") as f:
+SIMILARITY_URL = st.secrets["SIMILARITY_URL"]
+SIMILARITY_FILE = "similarity.pkl.gz"
+
+download_if_not_exists(SIMILARITY_URL, SIMILARITY_FILE)
+
+import gzip, pickle
+with gzip.open(SIMILARITY_FILE, "rb") as f:
     similarity = pickle.load(f)
 
 selected_movie = st.selectbox(
