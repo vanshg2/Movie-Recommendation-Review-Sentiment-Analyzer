@@ -1,0 +1,18 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.env/
+
+# Large ML artifacts
+similarity.pkl
+similarity.pkl.gz
+topk_similarity.pkl.gz
+*.pkl
+*.npz
+
+# OS files
+.DS_Store
+Thumbs.db
